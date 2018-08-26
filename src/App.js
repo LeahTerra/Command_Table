@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
 
+const modLogo =<img src='https://pbs.twimg.com/media/CTEHRvEUcAATDsl.png' width='20px' height='20px'/>;
+
 var data = [
   {
       command:"!anna",
@@ -53,7 +55,7 @@ function CommandListItem({command}) {
   return (
     <tr>
         <td>{command.command}</td>
-        <td>{command.clearance} </td>
+        <td>{command.clearance === 'mod' ? modLogo : ''} </td>
         <td>{command.reply}</td>
     </tr>
   )
