@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
-import logo from './logo.svg';
-import './App.css';
-
 
 var data = [
   {
@@ -28,17 +25,9 @@ var data = [
 ];
 
 class CommandList extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {items:[]};
-
-    let { commands } = this.props;
-    for(var i = 0; i < data.length; i++){
-      this.state.items.push(<CommandListItem commands={data[i]} />);
-    }
-  };
+  
   render() {
+      let { command } = this.props;
       return (
         <div>
           <table>
@@ -48,7 +37,9 @@ class CommandList extends React.Component {
                 <th>clearance</th>
                 <th>reply</th>
               </tr>
-              {this.state.items}
+              {data.map((command) => {
+                return <CommandListItem command={command} />
+              })}
             </tbody>  
           </table>
         </div>
@@ -56,13 +47,14 @@ class CommandList extends React.Component {
   }
 };
 
-function CommandListItem(commands) {
+function CommandListItem({command}) {
+  console.log(command);
+  
   return (
     <tr>
-        <td>{commands.commands.command}</td>
-        <td>{commands.commands.clearance}</td>
-        <td>{commands.commands.reply}</td>
-        {console.log(commands.commands)}
+        <td>{command.command}</td>
+        <td>{command.clearance} </td>
+        <td>{command.reply}</td>
     </tr>
   )
 }
