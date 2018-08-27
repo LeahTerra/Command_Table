@@ -1,64 +1,51 @@
 import React, { Component } from 'react';
-import ReactDOM from "react-dom";
+import Table from './Table';
 
-const modLogo =<img src='https://pbs.twimg.com/media/CTEHRvEUcAATDsl.png' width='20px' height='20px'/>;
+class CommandList extends Component {
 
-var data = [
-  {
-      command:"!anna",
-      clearance: "all",
-      reply: "Anna is a girl from Prague"
-  },
-  {
-      command: "!ariton",
-      clearance: "all",
-      reply: "Ariton is greek"
-  },
-  {
-      command: "!believe",
-      clearance: "mod",
-      reply: "we believe"
-  },
-  {
-      command: "!nobelieve",
-      clearance: "mod",
-      reply: "we don't believe"
-  }
-];
-
-class CommandList extends React.Component {
+  state = {
+      commands: [
+      {
+        command:"!anna",
+        clearance: "all",
+        reply: "Anna is a girl from Prague"
+      },
+      {
+          command: "!ariton",
+          clearance: "all",
+          reply: "Ariton is greek"
+      },
+      {
+          command: "!believe",
+          clearance: "mod",
+          reply: "we believe"
+      },
+      {
+          command: "!nobelieve",
+          clearance: "mod",
+          reply: "we don't believe"
+      },
+    ]};
   
+
+  deleteCommand = index => {
+    this.setState({
+      commands: this.state.commands.filter((command, i) => {
+          return i !== index;
+      })
+    })
+  };
+
   render() {
-      let { command } = this.props;
-      return (
-        <div>
-          <table>
-            <tbody>
-              <tr>
-                <th>command</th>
-                <th>clearance</th>
-                <th>reply</th>
-              </tr>
-              {data.map((command) => {
-                return <CommandListItem command={command} />
-              })}
-            </tbody>  
-          </table>
-        </div>
-      )
+    return (
+      <div>
+        <Table
+          commands={this.state.commands}
+          deleteCommand={this.deleteCommand}
+        />
+      </div>
+    )
   }
 };
-
-function CommandListItem({command}) {
-  console.log(command);
-  
-  return (
-    <tr>
-        <td>{command.command}</td>
-        <td>{command.clearance === 'mod' ? modLogo : ''} </td>
-        <td>{command.reply}</td>
-    </tr>
-  )
-}
 
 export default CommandList
