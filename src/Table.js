@@ -32,7 +32,8 @@ const CommandListHeader = () => {
 }
 
 const CommandListItems = props => {
-    const rows = props.commands.map((row, index) =>{
+    console.log(props.commands)
+    return <tbody>{ props.commands.map((row, index) =>{
         return (
             <tr key={index}>
                 <td>{row.command}</td>
@@ -41,8 +42,7 @@ const CommandListItems = props => {
                 <td><button onClick={() => props.deleteCommand(index)}>Delete</button></td>
             </tr>
         )
-    });
-    return <tbody>{rows}</tbody>
+    }) }</tbody>;
 }
 
 export default Table
