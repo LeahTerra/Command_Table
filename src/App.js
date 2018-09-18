@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import Table from './Table';
-import Add from './Add';
+import AddCommandForm from './Add';
 
 class CommandList extends Component {
+  
+  constructor() {
+    super();
+    this.addCommand = this.addCommand.bind(this)
+  }
+
   state = {
       commands: [
       {
@@ -26,14 +32,14 @@ class CommandList extends Component {
           reply: "we don't believe"
       },
     ],
-      bool: false
+      newCommandTrigger: false
   };
   
-  addCommand = (newCommand) => {
-
-    this.state.commands.push(newCommand),
+  addCommand(newCommand){
+    console.log(newCommand)
+    this.state.commands.push(newCommand);
     this.setState({
-      bool: false
+      newCommandTrigger: false
     })
 
   }
@@ -46,22 +52,21 @@ class CommandList extends Component {
     })
   };
 
-  changeBool() {
+  changeCommandTrigger() {
     this.state.bool 
-      ? this.setState({bool: false})
-      : this.setState({bool: true});
+      ? this.setState({newCommandTrigger: false})
+      : this.setState({newCommandTrigger: true});
   }
 
   render() {
-    console.log(this.state.commands)
     return (
       <div>
         <Table
           commands={this.state.commands}
           deleteCommand={this.deleteCommand}
         />
-        <button onClick={() => this.changeBool()}> Add Command </button>
-        {this.state.bool === true ? <Add command={this.state} addCommand={this.addCommand}/> : ''}
+        <button onClick={() => this.changeCommandTrigger()}> Add Command </button>
+        {this.state.newCommandTrigger === true ? <AddCommandForm OriginalList={this.state.commands} addCommand={this.addCommand}/> : ''}
       </div>
     )
   }

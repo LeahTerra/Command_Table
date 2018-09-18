@@ -32,7 +32,6 @@ const CommandListHeader = () => {
 }
 
 const CommandListItems = props => {
-    console.log(props.commands)
     return <tbody>{ props.commands.map((row, index) =>{
         return (
             <tr key={index}>
